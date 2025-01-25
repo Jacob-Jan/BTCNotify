@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background">
+
+    <!-- API Key Section -->
+    <TextView
+        android:id="@+id/apiKeyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="API Key CoinGecko"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/apiKeyInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Enter CoinGecko API Key"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor" />
+
+    <!-- Multiple Section -->
+    <TextView
+        android:id="@+id/multipleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="When Notification"
+        android:textColor="@color/textColor"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/multipleInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:inputType="number"
+        android:padding="12dp"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
+
+        <Button
+            android:id="@+id/button1000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1000"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#333333"
+            android:layout_marginStart="8dp" />
+
+        <Button
+            android:id="@+id/button10000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="10000"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#333333"
+            android:layout_marginStart="8dp" />
+
+        <Button
+            android:id="@+id/button100000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100000"
+            android:backgroundTint="@android:color/white"
+            android:textColor="#333333"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/multipleDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Notify at every crossing of a multiple of x"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp" />
+
+    <!-- Notification Action Section -->
+    <TextView
+        android:id="@+id/notificationActionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="On Notification Click"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Switch
+            android:id="@+id/switchNotificationAction"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:checked="false" />
+
+        <TextView
+            android:id="@+id/switchText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Open TradingView (BTCUSD) in browser instead of BTC Notify app on notification click"
+            android:textColor="@color/textColor" />
+    </LinearLayout>
+</LinearLayout>
