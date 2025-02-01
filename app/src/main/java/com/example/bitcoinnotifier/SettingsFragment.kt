@@ -32,12 +32,13 @@ class SettingsFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 val apiKey = s.toString()
                 if (apiKey.isNotEmpty()) {
-                    // Save the API key
                     sharedPreferences.edit().putString("API_KEY", apiKey).apply()
-
-                    // Start the price worker with the new API key
-                    WorkerUtils.startPriceWorker(requireContext(), apiKey)
+                } else {
+                    sharedPreferences.edit().putString("API_KEY", null).apply()
                 }
+                // Start the price worker with the new API key
+                WorkerUtils.startPriceWorker(requireContext())
+
             }
         })
 

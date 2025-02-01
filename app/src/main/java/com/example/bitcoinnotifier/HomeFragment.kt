@@ -42,15 +42,12 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.settingsFragment)
         }
 
-        val sharedPreferences = requireContext().getSharedPreferences("APP_PREFERENCES", Context.MODE_PRIVATE)
-        val apiKey = sharedPreferences.getString("API_KEY", "")
-
         loadLastPriceAndTime()
         observeWorker()
 
         // Start worker only on first fragment load
-        if (isFirstLaunch && !apiKey.isNullOrEmpty()) {
-            WorkerUtils.startPriceWorker(requireContext(), apiKey)
+        if (isFirstLaunch) {
+            WorkerUtils.startPriceWorker(requireContext())
             isFirstLaunch = false // Update flag after starting the worker
         }
 
@@ -72,7 +69,7 @@ class HomeFragment : Fragment() {
                 Log.d("HomeFragment", "Network connected")
                 if (!isNetworkAvailable) {
                     isNetworkAvailable = true
-                    restartPriceWorker() // Restart the worker only when the network is reconnected
+                    WorkerUtils.startPriceWorker(requireContext()) // Restart the worker only when the network is reconnected
                 }
             }
             onNetworkLost = {
@@ -97,6 +94,7 @@ class HomeFragment : Fragment() {
         val sharedPreferences = requireContext().getSharedPreferences("APP_PREFERENCES", Context.MODE_PRIVATE)
         val lastPrice = sharedPreferences.getInt("LAST_PRICE", 0)
         val lastUpdated = sharedPreferences.getString("LAST_UPDATED", "Never")
+        val apiKey = sharedPreferences.getString("API_KEY", null)
 
         if (lastPrice != 0) {
             priceText.text = "$${lastPrice}"
@@ -105,6 +103,13 @@ class HomeFragment : Fragment() {
         }
 
         timeText.text = "Last updated: $lastUpdated"
+
+        val apiKeyWarning = view?.findViewById<TextView>(R.id.apiKeyWarning)
+        if (apiKey.isNullOrEmpty()) {
+            apiKeyWarning?.visibility = View.VISIBLE
+        } else {
+            apiKeyWarning?.visibility = View.GONE
+        }
     }
 
     private fun observeWorker() {
@@ -115,15 +120,6 @@ class HomeFragment : Fragment() {
                     loadLastPriceAndTime()
                 }
             }
-    }
-
-    private fun restartPriceWorker() {
-        val sharedPreferences = requireContext().getSharedPreferences("APP_PREFERENCES", Context.MODE_PRIVATE)
-        val apiKey = sharedPreferences.getString("API_KEY", "")
-
-        if (!apiKey.isNullOrEmpty()) {
-            WorkerUtils.startPriceWorker(requireContext(), apiKey)
-        }
     }
 
     private fun refreshPrice() {
@@ -138,25 +134,13 @@ class HomeFragment : Fragment() {
 
         rotateAnimation.start()
 
-        // Restart the worker to fetch the latest data
-        val sharedPreferences = requireContext().getSharedPreferences("APP_PREFERENCES", Context.MODE_PRIVATE)
-        val apiKey = sharedPreferences.getString("API_KEY", "")
-
-        if (!apiKey.isNullOrEmpty()) {
-            WorkerUtils.startPriceWorker(requireContext(), apiKey)
-
-            // Simulate a delay to visually complete the animation and re-enable the icon
-            priceText.postDelayed({
-                syncIcon.isEnabled = true
-                syncIcon.alpha = 1.0f // Restore appearance
-                loadLastPriceAndTime() // Reload price and time after worker updates SharedPreferences
-            }, 2000)
-        } else {
-            // Handle the case where API key is missing
-            Log.e("HomeFragment", "API Key is missing. Cannot refresh data.")
+        WorkerUtils.startPriceWorker(requireContext())
+        // Simulate a delay to visually complete the animation and re-enable the icon
+        priceText.postDelayed({
             syncIcon.isEnabled = true
-            syncIcon.alpha = 1.0f
-        }
+            syncIcon.alpha = 1.0f // Restore appearance
+            loadLastPriceAndTime() // Reload price and time after worker updates SharedPreferences
+        }, 2000)
     }
 
     private fun openLightningLink(link: String) {
@@ -173,7 +157,7 @@ class HomeFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("No lightning wallet found")
             .setMessage("You need a lightning wallet which accepts dynamic invoices.")
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Close", null)
             .show()
     }
 }

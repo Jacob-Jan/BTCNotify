@@ -22,11 +22,7 @@ class PriceCheckWorker(context: Context, params: WorkerParameters) : CoroutineWo
         val sharedPreferences = applicationContext.getSharedPreferences("APP_PREFERENCES", Context.MODE_PRIVATE)
 
         val multiple = sharedPreferences.getInt("MULTIPLE", 1000) // Default to 100
-        val apiKey = sharedPreferences.getString("API_KEY", "")
-
-        if (apiKey.isNullOrEmpty()) {
-            return Result.failure()
-        }
+        val apiKey = sharedPreferences.getString("API_KEY", null)
 
         val currentPrice = fetchBitcoinPrice(apiKey)
         if (currentPrice != null) {
@@ -71,12 +67,13 @@ class PriceCheckWorker(context: Context, params: WorkerParameters) : CoroutineWo
         return Result.success()
     }
 
-    private suspend fun fetchBitcoinPrice(apiKey: String): Int? = withContext(Dispatchers.IO) {
+    private suspend fun fetchBitcoinPrice(apiKey: String?): Int? = withContext(Dispatchers.IO) {
         try {
+            val safeApiKey = apiKey ?: "Temp"
             val client = OkHttpClient()
             val request = Request.Builder()
                 .url("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd")
-                .addHeader("Authorization", "Bearer $apiKey") // Optional if API key is required
+                .addHeader("Authorization", "Bearer $safeApiKey")
                 .build()
             val response = client.newCall(request).execute()
             val body = response.body?.string()

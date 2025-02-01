@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 
 object WorkerUtils {
 
-    fun startPriceWorker(context: Context, apiKey: String) {
+    fun startPriceWorker(context: Context) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED) // Ensure the worker only runs when connected
             .build()
