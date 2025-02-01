@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         // Get reference to the donation button
         val donationButton = view.findViewById<Button>(R.id.donationButton)
         donationButton.setOnClickListener {
-            openLightningLink("lightning:btcnotify@getalby.com")
+            openLightningLink("lnurl:btcnotify@getalby.com")
         }
 
         return view
@@ -171,13 +171,8 @@ class HomeFragment : Fragment() {
 
     private fun showNoWalletDialog() {
         AlertDialog.Builder(requireContext())
-            .setTitle("No Lightning Wallet Found")
-            .setMessage("You need a Lightning wallet. Would you like to search for one in the Play Store?")
-            .setPositiveButton("Yes") { _, _ ->
-                val playStoreUri = Uri.parse("market://search?q=lightning+wallet")
-                val storeIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
-                startActivity(storeIntent)
-            }
+            .setTitle("No lightning wallet found")
+            .setMessage("You need a lightning wallet which accepts dynamic invoices.")
             .setNegativeButton("Cancel", null)
             .show()
     }
