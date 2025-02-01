@@ -40,6 +40,7 @@ class PriceCheckWorker(context: Context, params: WorkerParameters) : CoroutineWo
                 if (currentThreshold != lastThreshold) {
                     // Determine direction and send notification
                     val direction = if (currentThreshold > lastThreshold) "upwards" else "downwards"
+                    val symbol = if (currentThreshold > lastThreshold) "⬆" else "⬇"
                     val thresholdCrossed = if (direction == "upwards") {
                         currentThreshold
                     } else {
@@ -51,7 +52,7 @@ class PriceCheckWorker(context: Context, params: WorkerParameters) : CoroutineWo
                         NotificationAction.OPEN_APP
                     }
                     sendNotification(
-                        "Bitcoin price crossed $thresholdCrossed $direction",
+                        "$symbol Bitcoin price crossed $thresholdCrossed $direction",
                         "New Price: $${currentPrice.toInt()}",
                         notificationAction
                     )
