@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="150sp"
+        android:layout_marginBottom="2sp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -24,9 +24,9 @@
 
         <ImageView
             android:id="@+id/syncIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:paddingHorizontal="12dp"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
+            android:paddingHorizontal="12sp"
             android:src="@drawable/baseline_currency_exchange_24"
             android:contentDescription="Sync Icon"
             android:background="?attr/selectableItemBackground"
@@ -43,7 +43,7 @@
         android:text="Last updated: --"
         android:textColor="@color/textColor"
         android:textSize="16sp"
-        android:paddingHorizontal="16dp" />
+        android:paddingHorizontal="16sp" />
 
     <TextView
         android:id="@+id/apiKeyWarning"
@@ -55,19 +55,19 @@
         android:textColor="@color/textColor"
         android:gravity="center"
         android:textSize="16sp"
-        android:paddingHorizontal="30dp"
-        android:paddingVertical="20dp"
+        android:paddingHorizontal="30sp"
+        android:paddingVertical="20sp"
         android:visibility="gone"/>
 
     <!-- Settings Button -->
     <ImageButton
         android:id="@+id/settingsButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="48sp"
+        android:layout_height="48sp"
         android:contentDescription="Settings"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="16sp"
         android:src="@drawable/ic_gear"
         android:background="?attr/selectableItemBackground" />
 
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="24sp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -95,12 +95,12 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="8sp"
             android:text="Buy me a cup of tea ⚡"
             android:textAllCaps="false"
             android:backgroundTint="@android:color/white"
             android:textColor="#333333"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"/>
+            android:paddingHorizontal="16sp"
+            android:paddingVertical="8sp"/>
     </LinearLayout>
 </RelativeLayout>

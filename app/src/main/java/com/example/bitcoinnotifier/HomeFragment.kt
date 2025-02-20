@@ -4,6 +4,8 @@ import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -154,10 +156,26 @@ class HomeFragment : Fragment() {
     }
 
     private fun showNoWalletDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("No lightning wallet found")
+        val isDarkMode = resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+
+        // Create a custom TextView for the title
+        val titleTextView = TextView(requireContext()).apply {
+            text = "No lightning wallet found"
+            textSize = 20f
+            setPadding(40, 40, 40, 20) // Add padding for better appearance
+            setTextColor(if (isDarkMode) Color.WHITE else Color.BLACK) // Adjust text color
+        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setCustomTitle(titleTextView) // Use custom title instead of setTitle()
             .setMessage("You need a lightning wallet which accepts dynamic invoices.")
             .setNegativeButton("Close", null)
             .show()
+
+        // Change button color based on dark mode
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.let { button ->
+            button.setTextColor(if (isDarkMode) Color.WHITE else Color.BLACK)
+        }
     }
 }
