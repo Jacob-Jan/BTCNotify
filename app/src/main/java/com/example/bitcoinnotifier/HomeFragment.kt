@@ -40,10 +40,6 @@ class HomeFragment : Fragment() {
             refreshPrice()
         }
 
-        view.findViewById<View>(R.id.settingsButton).setOnClickListener {
-            findNavController().navigate(R.id.settingsFragment)
-        }
-
         loadLastPriceAndTime()
         observeWorker()
 

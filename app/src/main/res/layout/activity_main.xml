@@ -1,8 +1,69 @@
-<androidx.fragment.app.FragmentContainerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_host_fragment"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:navGraph="@navigation/nav_graph"
-    android:name="androidx.navigation.fragment.NavHostFragment" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background">
+
+<!-- App Name Top-Left -->
+<TextView
+    android:id="@+id/appTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Bitcoin Notifications"
+    android:textColor="@android:color/white"
+    android:textStyle="bold"
+    android:textSize="20sp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp" />
+
+<fragment
+    android:id="@+id/nav_host_fragment"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/footerNav"
+    android:layout_below="@id/appTitle"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/nav_graph" />
+
+<!-- Footer Navigation Bar -->
+<LinearLayout
+    android:id="@+id/footerNav"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:background="#f3f3f3"
+    android:gravity="center">
+
+    <ImageButton
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_home"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Home"
+        app:tint="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/navSettings"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_gear"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Settings"
+        app:tint="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/navInfo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_info"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="Info"
+        app:tint="@android:color/white" />
+</LinearLayout>
+</RelativeLayout>

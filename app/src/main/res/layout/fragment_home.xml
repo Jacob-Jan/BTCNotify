@@ -59,18 +59,6 @@
         android:paddingVertical="20sp"
         android:visibility="gone"/>
 
-    <!-- Settings Button -->
-    <ImageButton
-        android:id="@+id/settingsButton"
-        android:layout_width="48sp"
-        android:layout_height="48sp"
-        android:contentDescription="Settings"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16sp"
-        android:layout_marginTop="16sp"
-        android:src="@drawable/ic_gear"
-        android:background="?attr/selectableItemBackground" />
-
     <!-- Donation Section -->
     <LinearLayout
         android:id="@+id/donationLayout"
